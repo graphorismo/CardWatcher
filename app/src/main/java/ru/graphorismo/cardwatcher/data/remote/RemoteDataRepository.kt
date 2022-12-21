@@ -31,19 +31,19 @@ class RemoteDataRepository(val binListService: IBinlistService) : IRemoteReposit
 
     private fun convertBinlistToCardData(binlist: Binlist): CardData{
         val bankData = BankData(
-            city = binlist.bank.city,
-            name = binlist.bank.name,
-            phone = binlist.bank.phone,
-            url = binlist.bank.url)
+            city = binlist.bank?.city,
+            name = binlist.bank?.name,
+            phone = binlist.bank?.phone,
+            url = binlist.bank?.url)
 
         val countryData = CountryData(
-            latitude = binlist.country.latitude,
-            longitude = binlist.country.longitude,
-            name = binlist.country.name)
+            latitude = binlist.country?.latitude,
+            longitude = binlist.country?.longitude,
+            name = binlist.country?.name)
 
         val cardNumberData = CardNumberData(
-            length = binlist.number.length,
-            luhn = binlist.number.luhn)
+            length = binlist.number?.length,
+            luhn = binlist.number?.luhn)
 
         val cardData = CardData(
             bank = bankData,

@@ -1,11 +1,11 @@
 package ru.graphorismo.cardwatcher.domain.card
 
 data class CardData(
-    val bank: BankData = BankData(),
-    val brand: String = "",
-    val country: CountryData = CountryData(),
-    val number: CardNumberData = CardNumberData(),
+    val bank: BankData? = null,
+    val brand: String? = null,
+    val country: CountryData? = null,
+    val number: CardNumberData? = null,
     val prepaid: Boolean? = null,
-    val scheme: String = "",
-    val type: String = ""
+    val scheme: String? = null,
+    val type: String? = null
 )

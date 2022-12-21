@@ -104,19 +104,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateUi(uiState: MainUiState) {
         val cardData = uiState.cardData
-        editTextSchemeNetwork.setText(cardData.scheme)
-        editTextBrand.setText(cardData.brand)
-        editTextType.setText(cardData.type)
+        editTextSchemeNetwork.setText(cardData.scheme ?:  "")
+        editTextBrand.setText(cardData.brand ?:  "")
+        editTextType.setText(cardData.type ?:  "")
         editTextPrepaid.setText(cardData.prepaid?.toString() ?:  "")
-        editTextCardNumberLength.setText(cardData.number.length?.toString() ?:  "")
-        editTextCardNumberLuhn.setText(cardData.number.luhn?.toString() ?:  "")
-        editTextCountryName.setText(cardData.country.name)
-        editTextCountryLatitude.setText(cardData.country.latitude?.toString() ?:  "")
-        editTextCountryLongitude.setText(cardData.country.longitude?.toString() ?:  "")
-        editTextBankName.setText(cardData.bank.name)
-        editTextBankURL.setText(cardData.bank.url)
-        editTextBankPhone.setText(cardData.bank.phone)
-        editTextBankCity.setText(cardData.bank.city)
+        editTextCardNumberLength.setText(cardData.number?.length?.toString() ?:  "")
+        editTextCardNumberLuhn.setText(cardData.number?.luhn?.toString() ?:  "")
+        editTextCountryName.setText(cardData.country?.name ?:  "")
+        editTextCountryLatitude.setText(cardData.country?.latitude?.toString() ?:  "")
+        editTextCountryLongitude.setText(cardData.country?.longitude?.toString() ?:  "")
+        editTextBankName.setText(cardData.bank?.name ?:  "")
+        editTextBankURL.setText(cardData.bank?.url ?:  "")
+        editTextBankPhone.setText(cardData.bank?.phone ?:  "")
+        editTextBankCity.setText(cardData.bank?.city ?:  "")
     }
 
 
