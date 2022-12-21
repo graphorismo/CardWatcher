@@ -1,11 +1,13 @@
 package ru.graphorismo.cardwatcher.ui
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -18,6 +20,7 @@ import ru.graphorismo.cardwatcher.data.remote.exceptions.CardNotFoundException
 import ru.graphorismo.cardwatcher.data.remote.exceptions.RequestTimeoutException
 import ru.graphorismo.cardwatcher.domain.card.CardData
 import ru.graphorismo.cardwatcher.domain.card.MainUiState
+import java.net.ConnectException
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -95,7 +98,20 @@ class MainActivity : AppCompatActivity() {
                     if(uiState.exception == null){
                         updateUi(uiState)
                     }else{
-
+                        when(uiState.exception){
+                            is BlankBinException -> {
+                                showErrorDialog("","Card BIN can't be blank")
+                            }
+                            is CardNotFoundException -> {
+                                showErrorDialog("","Card not found")
+                            }
+                            is RequestTimeoutException -> {
+                                showErrorDialog("Error","Network request timed out")
+                            }
+                            is Exception -> {
+                                showErrorDialog("Error",uiState.exception.message.toString())
+                            }
+                        }
                     }
                 }
             }
@@ -117,6 +133,16 @@ class MainActivity : AppCompatActivity() {
         editTextBankURL.setText(cardData.bank?.url ?:  "")
         editTextBankPhone.setText(cardData.bank?.phone ?:  "")
         editTextBankCity.setText(cardData.bank?.city ?:  "")
+    }
+
+    private fun showErrorDialog(title: String, message: String){
+        var builder = AlertDialog.Builder(this)
+        builder.setTitle(title)
+        builder.setMessage(message)
+        builder.setOnDismissListener {
+            viewModel.onEvent(MainUiEvent.ErrorHandled)
+        }
+        builder.show()
     }
 
 

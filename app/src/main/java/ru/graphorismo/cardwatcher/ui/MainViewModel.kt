@@ -32,8 +32,13 @@ class MainViewModel @Inject constructor(val remoteRepository: IRemoteRepository)
                         mainUiState.value = MainUiState(exception = ex)
                     }catch (ex: RequestTimeoutException){
                         mainUiState.value = MainUiState(exception = ex)
+                    }catch (ex: Exception){
+                        mainUiState.value = MainUiState(exception = ex)
                     }
                 }
+            }
+            is MainUiEvent.ErrorHandled -> {
+                mainUiState.value = MainUiState()
             }
         }
     }

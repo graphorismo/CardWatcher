@@ -1,6 +1,7 @@
 package ru.graphorismo.cardwatcher.data.remote
 
 import android.util.Log
+import retrofit2.Response
 import ru.graphorismo.cardwatcher.data.remote.exceptions.BlankBinException
 import ru.graphorismo.cardwatcher.data.remote.exceptions.CardNotFoundException
 import ru.graphorismo.cardwatcher.data.remote.exceptions.RequestTimeoutException
@@ -16,7 +17,7 @@ class RemoteDataRepository(val binListService: IBinlistService) : IRemoteReposit
     override suspend fun getCardDataByBIN(bin: String): CardData {
         if(bin.isBlank()) throw BlankBinException()
         val response = binListService.callForCardDataByItsBIN(bin)
-        var cardData: CardData
+        var cardData = CardData()
         if (response != null) {
             if(response.isSuccessful && response.body() != null){
                 cardData = convertBinlistToCardData(response.body()!!)
