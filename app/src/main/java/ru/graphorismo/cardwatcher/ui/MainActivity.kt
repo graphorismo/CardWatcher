@@ -1,13 +1,23 @@
-package ru.graphorismo.cardwatcher
+package ru.graphorismo.cardwatcher.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
 import android.widget.EditText
+import androidx.activity.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import ru.graphorismo.cardwatcher.R
+import ru.graphorismo.cardwatcher.domain.card.CardData
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    val viewModel: MainViewModel by viewModels()
 
     lateinit var editTextBin : EditText
     lateinit var editTextSchemeNetwork : EditText
@@ -30,6 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         initEditTextFields()
         blockInputForOutputEditTextFields()
+        observeMainUiState()
 
     }
 
@@ -64,6 +75,32 @@ class MainActivity : AppCompatActivity() {
         editTextBankURL.inputType = InputType.TYPE_NULL
         editTextBankPhone.inputType = InputType.TYPE_NULL
         editTextBankCity.inputType = InputType.TYPE_NULL
+    }
+
+    private fun observeMainUiState(){
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.mainUiState.collect { uiState ->
+                    updateUi(uiState)
+                }
+            }
+        }
+    }
+
+    private fun updateUi(uiState: CardData) {
+        editTextSchemeNetwork.setText(uiState.scheme)
+        editTextBrand.setText(uiState.brand)
+        editTextType.setText(uiState.type)
+        editTextPrepaid.setText(uiState.prepaid?.toString() ?:  "")
+        editTextCardNumberLength.setText(uiState.number.length?.toString() ?:  "")
+        editTextCardNumberLuhn.setText(uiState.number.luhn?.toString() ?:  "")
+        editTextCountryName.setText(uiState.country.name)
+        editTextCountryLatitude.setText(uiState.country.latitude?.toString() ?:  "")
+        editTextCountryLongitude.setText(uiState.country.longitude?.toString() ?:  "")
+        editTextBankName.setText(uiState.bank.name)
+        editTextBankURL.setText(uiState.bank.url)
+        editTextBankPhone.setText(uiState.bank.phone)
+        editTextBankCity.setText(uiState.bank.city)
     }
 
 
