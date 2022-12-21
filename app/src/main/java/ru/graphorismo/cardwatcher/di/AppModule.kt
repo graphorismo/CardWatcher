@@ -5,8 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
+import retrofit2.converter.moshi.MoshiConverterFactory
 import ru.graphorismo.cardwatcher.data.remote.RemoteDataRepository
 import ru.graphorismo.cardwatcher.data.remote.retrofit.IBinlistService
 import ru.graphorismo.cardwatcher.domain.IRemoteRepository
@@ -33,7 +32,7 @@ object AppModule {
     fun providesRetrofit() : Retrofit{
         return Retrofit.Builder()
             .baseUrl("https://lookup.binlist.net/")
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create())
             .build();
     }
 

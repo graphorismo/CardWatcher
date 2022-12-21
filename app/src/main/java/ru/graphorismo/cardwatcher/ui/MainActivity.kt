@@ -3,6 +3,7 @@ package ru.graphorismo.cardwatcher.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
+import android.widget.Button
 import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
@@ -12,12 +13,18 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.graphorismo.cardwatcher.R
+import ru.graphorismo.cardwatcher.data.remote.exceptions.BlankBinException
+import ru.graphorismo.cardwatcher.data.remote.exceptions.CardNotFoundException
+import ru.graphorismo.cardwatcher.data.remote.exceptions.RequestTimeoutException
 import ru.graphorismo.cardwatcher.domain.card.CardData
+import ru.graphorismo.cardwatcher.domain.card.MainUiState
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     val viewModel: MainViewModel by viewModels()
+
+    lateinit var buttonSearch: Button
 
     lateinit var editTextBin : EditText
     lateinit var editTextSchemeNetwork : EditText
@@ -42,6 +49,10 @@ class MainActivity : AppCompatActivity() {
         blockInputForOutputEditTextFields()
         observeMainUiState()
 
+        buttonSearch = findViewById(R.id.mainActivity_button_search)
+        buttonSearch.setOnClickListener {
+                viewModel.onEvent(MainUiEvent.Search(editTextBin.text.toString()))
+        }
     }
 
     private fun initEditTextFields() {
@@ -81,26 +92,31 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.mainUiState.collect { uiState ->
-                    updateUi(uiState)
+                    if(uiState.exception == null){
+                        updateUi(uiState)
+                    }else{
+
+                    }
                 }
             }
         }
     }
 
-    private fun updateUi(uiState: CardData) {
-        editTextSchemeNetwork.setText(uiState.scheme)
-        editTextBrand.setText(uiState.brand)
-        editTextType.setText(uiState.type)
-        editTextPrepaid.setText(uiState.prepaid?.toString() ?:  "")
-        editTextCardNumberLength.setText(uiState.number.length?.toString() ?:  "")
-        editTextCardNumberLuhn.setText(uiState.number.luhn?.toString() ?:  "")
-        editTextCountryName.setText(uiState.country.name)
-        editTextCountryLatitude.setText(uiState.country.latitude?.toString() ?:  "")
-        editTextCountryLongitude.setText(uiState.country.longitude?.toString() ?:  "")
-        editTextBankName.setText(uiState.bank.name)
-        editTextBankURL.setText(uiState.bank.url)
-        editTextBankPhone.setText(uiState.bank.phone)
-        editTextBankCity.setText(uiState.bank.city)
+    private fun updateUi(uiState: MainUiState) {
+        val cardData = uiState.cardData
+        editTextSchemeNetwork.setText(cardData.scheme)
+        editTextBrand.setText(cardData.brand)
+        editTextType.setText(cardData.type)
+        editTextPrepaid.setText(cardData.prepaid?.toString() ?:  "")
+        editTextCardNumberLength.setText(cardData.number.length?.toString() ?:  "")
+        editTextCardNumberLuhn.setText(cardData.number.luhn?.toString() ?:  "")
+        editTextCountryName.setText(cardData.country.name)
+        editTextCountryLatitude.setText(cardData.country.latitude?.toString() ?:  "")
+        editTextCountryLongitude.setText(cardData.country.longitude?.toString() ?:  "")
+        editTextBankName.setText(cardData.bank.name)
+        editTextBankURL.setText(cardData.bank.url)
+        editTextBankPhone.setText(cardData.bank.phone)
+        editTextBankCity.setText(cardData.bank.city)
     }
 
 
