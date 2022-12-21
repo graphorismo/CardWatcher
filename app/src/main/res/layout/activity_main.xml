@@ -1,18 +1,333 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/teal_700"
+    android:orientation="vertical"
+    android:padding="10dp">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <TableLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        android:padding="20dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TableRow>
+            <EditText
+                android:id="@+id/editTextNumberDecimal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:hint="BIN"
+                android:inputType="numberDecimal"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+                />
+        </TableRow>
+
+        <TableRow>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="50dp"
+                android:text="SEARCH"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="SCHEME / NETWORK"
+                android:textColor="@color/black"
+                android:layout_weight="0.5"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="BRAND"
+                android:textColor="@color/black"
+                android:layout_weight="0.5"/>
+        </TableRow>
+
+        <TableRow>
+            <EditText
+                android:id="@+id/mainActivity_editText_schemeNetwork"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="0.5"/>
+
+            <EditText
+                android:id="@+id/mainActivity_editText_brand"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="0.5"/>
+
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="TYPE"
+                android:textColor="@color/black"
+                android:layout_weight="0.5"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="PREPAID"
+                android:textColor="@color/black"
+                android:layout_weight="0.5"/>
+        </TableRow>
+
+        <TableRow>
+            <EditText
+                android:id="@+id/mainActivity_editText_type"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="0.5"/>
+
+            <EditText
+                android:id="@+id/mainActivity_editText_prepaid"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="0.5"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="CARD NUMBER"
+                android:textColor="@color/black"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="LENGTH"
+                android:textColor="@color/black"
+                android:layout_weight="0.5"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="LUHN"
+                android:textColor="@color/black"
+                android:layout_weight="0.5"/>
+        </TableRow>
+
+        <TableRow>
+            <EditText
+                android:id="@+id/mainActivity_editText_length"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="0.5"/>
+
+            <EditText
+                android:id="@+id/mainActivity_editText_luhn"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="0.5"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="COUNTRY"
+                android:textColor="@color/black"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                />
+        </TableRow>
+
+        <TableRow>
+            <EditText
+                android:id="@+id/mainActivity_editText_country"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="LATITUDE"
+                android:textColor="@color/black"
+                android:layout_weight="0.5"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="LONGITUDE"
+                android:textColor="@color/black"
+                android:layout_weight="0.5"/>
+        </TableRow>
+
+        <TableRow>
+            <EditText
+                android:id="@+id/mainActivity_editText_latitude"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="0.5"/>
+
+            <EditText
+                android:id="@+id/mainActivity_editText_longitude"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="0.5"/>
+        </TableRow>
+
+
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="BANK"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="NAME"
+                android:textColor="@color/black"
+                android:layout_weight="1"/>
+
+        </TableRow>
+
+        <TableRow>
+            <EditText
+                android:id="@+id/mainActivity_editText_bankName"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="URL"
+                android:textColor="@color/black"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow>
+            <EditText
+                android:id="@+id/mainActivity_editText_bankURL"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="PHONE"
+                android:textColor="@color/black"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow>
+            <EditText
+                android:id="@+id/mainActivity_editText_bankPhone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="CITY"
+                android:textColor="@color/black"
+                android:layout_weight="1"/>
+
+        </TableRow>
+
+        <TableRow>
+            <EditText
+                android:id="@+id/mainActivity_editText_bankCity"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"/>
+        </TableRow>
+
+
+    </TableLayout>
+
+
+
+
+
+</ScrollView>
