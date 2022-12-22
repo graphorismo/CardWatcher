@@ -1,4 +1,4 @@
-package ru.graphorismo.cardwatcher.ui
+package ru.graphorismo.cardwatcher.ui.main
 
 sealed interface MainUiEvent{
     class Search(val cardBIN: String) : MainUiEvent

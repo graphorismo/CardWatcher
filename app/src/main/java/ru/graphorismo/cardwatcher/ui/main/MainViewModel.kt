@@ -1,4 +1,4 @@
-package ru.graphorismo.cardwatcher.ui
+package ru.graphorismo.cardwatcher.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,7 +10,6 @@ import ru.graphorismo.cardwatcher.data.remote.exceptions.BlankBinException
 import ru.graphorismo.cardwatcher.data.remote.exceptions.CardNotFoundException
 import ru.graphorismo.cardwatcher.data.remote.exceptions.RequestTimeoutException
 import ru.graphorismo.cardwatcher.domain.IRemoteRepository
-import ru.graphorismo.cardwatcher.domain.card.CardData
 import ru.graphorismo.cardwatcher.domain.card.MainUiState
 import javax.inject.Inject
 

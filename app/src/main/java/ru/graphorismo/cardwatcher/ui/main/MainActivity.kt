@@ -1,6 +1,5 @@
-package ru.graphorismo.cardwatcher.ui
+package ru.graphorismo.cardwatcher.ui.main
 
-import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
@@ -12,15 +11,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.graphorismo.cardwatcher.R
 import ru.graphorismo.cardwatcher.data.remote.exceptions.BlankBinException
 import ru.graphorismo.cardwatcher.data.remote.exceptions.CardNotFoundException
 import ru.graphorismo.cardwatcher.data.remote.exceptions.RequestTimeoutException
-import ru.graphorismo.cardwatcher.domain.card.CardData
 import ru.graphorismo.cardwatcher.domain.card.MainUiState
-import java.net.ConnectException
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
