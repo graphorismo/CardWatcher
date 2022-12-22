@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import ru.graphorismo.cardwatcher.data.remote.exceptions.BlankBinException
 import ru.graphorismo.cardwatcher.data.remote.exceptions.CardNotFoundException
 import ru.graphorismo.cardwatcher.data.remote.exceptions.RequestTimeoutException
-import ru.graphorismo.cardwatcher.domain.IRemoteRepository
+import ru.graphorismo.cardwatcher.data.remote.IRemoteRepository
 import ru.graphorismo.cardwatcher.domain.card.MainUiState
 import javax.inject.Inject
 

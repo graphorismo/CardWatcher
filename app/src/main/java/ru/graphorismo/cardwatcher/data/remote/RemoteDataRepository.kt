@@ -1,13 +1,10 @@
 package ru.graphorismo.cardwatcher.data.remote
 
-import android.util.Log
-import retrofit2.Response
 import ru.graphorismo.cardwatcher.data.remote.exceptions.BlankBinException
 import ru.graphorismo.cardwatcher.data.remote.exceptions.CardNotFoundException
 import ru.graphorismo.cardwatcher.data.remote.exceptions.RequestTimeoutException
 import ru.graphorismo.cardwatcher.data.remote.retrofit.IBinlistService
 import ru.graphorismo.cardwatcher.data.remote.retrofit.binlist.Binlist
-import ru.graphorismo.cardwatcher.domain.IRemoteRepository
 import ru.graphorismo.cardwatcher.domain.card.BankData
 import ru.graphorismo.cardwatcher.domain.card.CardData
 import ru.graphorismo.cardwatcher.domain.card.CardNumberData

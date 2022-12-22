@@ -1,4 +1,4 @@
-package ru.graphorismo.cardwatcher.domain
+package ru.graphorismo.cardwatcher.data.remote
 
 import ru.graphorismo.cardwatcher.domain.card.CardData
 

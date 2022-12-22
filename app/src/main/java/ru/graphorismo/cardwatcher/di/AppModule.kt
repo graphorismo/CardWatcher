@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import ru.graphorismo.cardwatcher.data.remote.RemoteDataRepository
 import ru.graphorismo.cardwatcher.data.remote.retrofit.IBinlistService
-import ru.graphorismo.cardwatcher.domain.IRemoteRepository
+import ru.graphorismo.cardwatcher.data.remote.IRemoteRepository
 import javax.inject.Singleton
 
 @Module
@@ -17,7 +17,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providesIRemoteRepository(binlistService: IBinlistService) : IRemoteRepository{
+    fun providesIRemoteRepository(binlistService: IBinlistService) : IRemoteRepository {
         return RemoteDataRepository(binlistService);
     }
 
