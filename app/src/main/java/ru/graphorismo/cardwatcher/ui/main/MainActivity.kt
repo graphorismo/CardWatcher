@@ -64,10 +64,10 @@ class MainActivity : AppCompatActivity() {
         buttonHistory = findViewById(R.id.mainActivity_button_history)
         buttonHistory.setOnClickListener { openHistoryActivity() }
 
-        editTextBankPhone.setOnClickListener { openBankPhoneInCaller() }
-        editTextBankURL.setOnClickListener { openBankURLInBrowser() }
-        editTextCountryLatitude.setOnClickListener { openBankCoordinatesOnMap() }
-        editTextCountryLongitude.setOnClickListener { openBankCoordinatesOnMap() }
+        editTextBankPhone.setOnClickListener { openBankPhoneInCallerIfNotEmpty() }
+        editTextBankURL.setOnClickListener { openBankURLInBrowserIfNotEmpty() }
+        editTextCountryLatitude.setOnClickListener { openBankCoordinatesOnMapIfNotEmpty() }
+        editTextCountryLongitude.setOnClickListener { openBankCoordinatesOnMapIfNotEmpty() }
     }
 
     private fun openHistoryActivity() {
@@ -75,35 +75,43 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun openBankPhoneInCaller() {
-        val intent = Intent(Intent.ACTION_DIAL).apply {
-            data = Uri.parse("tel:${editTextBankPhone.text}")
-        }
-        try {
-            startActivity(intent)
-        } catch (ex: ActivityNotFoundException) {
-            showErrorDialog("Error", "Application not found")
-        }
-    }
-
-    private fun openBankURLInBrowser() {
-        val webpage: Uri = Uri.parse(editTextBankURL.text.toString())
-        val intent = Intent(Intent.ACTION_VIEW, webpage)
-        try {
-            startActivity(intent)
-        } catch (ex: ActivityNotFoundException) {
-            showErrorDialog("Error", "Application not found")
+    private fun openBankPhoneInCallerIfNotEmpty() {
+        if(editTextBankPhone.text.isNotBlank()){
+            val intent = Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel:${editTextBankPhone.text}")
+            }
+            try {
+                startActivity(intent)
+            } catch (ex: ActivityNotFoundException) {
+                showErrorDialog("Error", "Application not found")
+            }
         }
     }
 
-    private fun openBankCoordinatesOnMap() {
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            data = Uri.parse("geo:${editTextCountryLatitude.text},${editTextCountryLongitude.text}")
+    private fun openBankURLInBrowserIfNotEmpty() {
+        if(editTextBankURL.text.isNotBlank()){
+            val webpage: Uri = Uri.parse(editTextBankURL.text.toString())
+            val intent = Intent(Intent.ACTION_VIEW, webpage)
+            try {
+                startActivity(intent)
+            } catch (ex: ActivityNotFoundException) {
+                showErrorDialog("Error", "Application not found")
+            }
         }
-        try {
-            startActivity(intent)
-        } catch (ex: ActivityNotFoundException) {
-            showErrorDialog("Error", "Application not found")
+    }
+
+    private fun openBankCoordinatesOnMapIfNotEmpty() {
+        if (editTextCountryLatitude.text.isNotBlank()
+            && editTextCountryLongitude.text.isNotBlank()){
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse("geo:${editTextCountryLatitude.text},${editTextCountryLongitude.text}")
+            }
+            try {
+                startActivity(intent)
+            } catch (ex: ActivityNotFoundException) {
+                showErrorDialog("Error", "Application not found")
+            }
+
         }
     }
 
