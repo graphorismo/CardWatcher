@@ -1,13 +1,13 @@
 package ru.graphorismo.cardwatcher.ui.main
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -50,6 +50,11 @@ class MainActivity : AppCompatActivity() {
         initEditTextFields()
         blockInputForOutputEditTextFields()
         observeMainUiState()
+
+        val extras = intent.extras
+        if (extras != null) {
+            editTextBin.setText(extras.getString("BIN"))
+        }
 
         buttonSearch = findViewById(R.id.mainActivity_button_search)
         buttonSearch.setOnClickListener {
