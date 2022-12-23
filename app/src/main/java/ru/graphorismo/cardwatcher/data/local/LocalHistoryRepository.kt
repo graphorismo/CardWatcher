@@ -16,4 +16,9 @@ class LocalHistoryRepository(private val historyDatabase: HistoryDatabase)
         val historyLine = HistoryLine(line = line)
         dao.insertHistoryLine(historyLine)
     }
+
+    override suspend fun clearHistory() {
+        val dao = historyDatabase.historyDao()
+        dao.removeAll()
+    }
 }

@@ -1,5 +1,6 @@
 package ru.graphorismo.cardwatcher.ui.main
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
@@ -17,6 +18,7 @@ import ru.graphorismo.cardwatcher.data.remote.exceptions.BlankBinException
 import ru.graphorismo.cardwatcher.data.remote.exceptions.CardNotFoundException
 import ru.graphorismo.cardwatcher.data.remote.exceptions.RequestTimeoutException
 import ru.graphorismo.cardwatcher.domain.card.MainUiState
+import ru.graphorismo.cardwatcher.ui.history.HistoryActivity
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -24,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     val viewModel: MainViewModel by viewModels()
 
     lateinit var buttonSearch: Button
+    lateinit var buttonHistory: Button
 
     lateinit var editTextBin : EditText
     lateinit var editTextSchemeNetwork : EditText
@@ -51,6 +54,12 @@ class MainActivity : AppCompatActivity() {
         buttonSearch = findViewById(R.id.mainActivity_button_search)
         buttonSearch.setOnClickListener {
                 viewModel.onEvent(MainUiEvent.Search(editTextBin.text.toString()))
+        }
+
+        buttonHistory = findViewById(R.id.mainActivity_button_history)
+        buttonHistory.setOnClickListener {
+            var intent = Intent(this@MainActivity, HistoryActivity::class.java)
+            startActivity(intent)
         }
     }
 
