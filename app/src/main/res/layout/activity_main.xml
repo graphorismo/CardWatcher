@@ -34,7 +34,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="50dp"
+                android:layout_marginRight="5dp"
                 android:text="SEARCH"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/mainActivity_button_history"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="50dp"
+                android:layout_marginLeft="5dp"
+                android:text="HISTORY"
                 android:layout_weight="1"/>
         </TableRow>
 
