@@ -1,6 +1,8 @@
 package ru.graphorismo.cardwatcher.ui.main
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
 import android.widget.Button
@@ -57,14 +59,51 @@ class MainActivity : AppCompatActivity() {
         }
 
         buttonSearch = findViewById(R.id.mainActivity_button_search)
-        buttonSearch.setOnClickListener {
-                viewModel.onEvent(MainUiEvent.Search(editTextBin.text.toString()))
-        }
+        buttonSearch.setOnClickListener { viewModel.onEvent(MainUiEvent.Search(editTextBin.text.toString())) }
 
         buttonHistory = findViewById(R.id.mainActivity_button_history)
-        buttonHistory.setOnClickListener {
-            var intent = Intent(this@MainActivity, HistoryActivity::class.java)
+        buttonHistory.setOnClickListener { openHistoryActivity() }
+
+        editTextBankPhone.setOnClickListener { openBankPhoneInCaller() }
+        editTextBankURL.setOnClickListener { openBankURLInBrowser() }
+        editTextCountryLatitude.setOnClickListener { openBankCoordinatesOnMap() }
+        editTextCountryLongitude.setOnClickListener { openBankCoordinatesOnMap() }
+    }
+
+    private fun openHistoryActivity() {
+        var intent = Intent(this@MainActivity, HistoryActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun openBankPhoneInCaller() {
+        val intent = Intent(Intent.ACTION_DIAL).apply {
+            data = Uri.parse("tel:${editTextBankPhone.text}")
+        }
+        try {
             startActivity(intent)
+        } catch (ex: ActivityNotFoundException) {
+            showErrorDialog("Error", "Application not found")
+        }
+    }
+
+    private fun openBankURLInBrowser() {
+        val webpage: Uri = Uri.parse(editTextBankURL.text.toString())
+        val intent = Intent(Intent.ACTION_VIEW, webpage)
+        try {
+            startActivity(intent)
+        } catch (ex: ActivityNotFoundException) {
+            showErrorDialog("Error", "Application not found")
+        }
+    }
+
+    private fun openBankCoordinatesOnMap() {
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse("geo:${editTextCountryLatitude.text},${editTextCountryLongitude.text}")
+        }
+        try {
+            startActivity(intent)
+        } catch (ex: ActivityNotFoundException) {
+            showErrorDialog("Error", "Application not found")
         }
     }
 
