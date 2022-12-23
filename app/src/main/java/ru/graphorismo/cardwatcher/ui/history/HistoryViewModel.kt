@@ -15,6 +15,11 @@ class HistoryViewModel @Inject constructor(private val localHistoryRepository: I
 
     fun onEvent(event: HistoryUiEvent){
         when (event){
+            is HistoryUiEvent.LoadActivity -> {
+                viewModelScope.launch {
+                    uiState.value = HistoryUiState(lines = localHistoryRepository.getHistory())
+                }
+            }
             is HistoryUiEvent.ClickHistoryLine -> {
                 uiState.value = HistoryUiState(listOf(), lineCallback = event.line)
             }

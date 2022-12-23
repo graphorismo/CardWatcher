@@ -32,6 +32,7 @@ class HistoryActivity : AppCompatActivity() {
 
         initUi()
         observeUiStateChanges()
+        viewModel.onEvent(HistoryUiEvent.LoadActivity)
     }
 
     private fun initUi() {
