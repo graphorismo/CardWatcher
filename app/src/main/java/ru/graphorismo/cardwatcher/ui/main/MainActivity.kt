@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun openBankURLInBrowserIfNotEmpty() {
         if(editTextBankURL.text.isNotBlank()){
-            val webpage: Uri = Uri.parse(editTextBankURL.text.toString())
+            val webpage: Uri = Uri.parse("https://"+editTextBankURL.text.toString())
             val intent = Intent(Intent.ACTION_VIEW, webpage)
             try {
                 startActivity(intent)
